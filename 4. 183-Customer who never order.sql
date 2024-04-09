@@ -11,12 +11,12 @@ CREATE TABLE Orders (
     id INT PRIMARY KEY auto_increment,
     customerId INT,
     FOREIGN KEY (customerId)
-        REFERENCES Customers (id) 
+        REFERENCES Customers (id)
 );
 
 drop table Orders;
 
-INSERT INTO Customers(name) VALUES 
+INSERT INTO Customers(name) VALUES
 ('joe'),
 ('henry'),
 ('sam'),
@@ -26,12 +26,12 @@ INSERT INTO Orders(customerId) values
 (3),
 (1);
 
-SELECT 
+SELECT
     *
 FROM
     Orders;
-    
-SELECT 
+
+SELECT
     name AS Customers
 FROM
     Customers
@@ -39,4 +39,13 @@ FROM
     Orders ON Customers.id = Orders.customerId
 WHERE
     Orders.customerId IS NULL;
-
+    
+SELECT 
+    name AS Customers
+FROM
+    Customers
+WHERE
+    id NOT IN (SELECT 
+            customerId
+        FROM
+            Orders);
